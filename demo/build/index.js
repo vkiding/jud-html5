@@ -86,7 +86,7 @@
           "fontSize": 42
         },
         "attr": {
-          "value": "Hello jud !"
+          "value": "Hello Jud !"
         }
       }
     ]

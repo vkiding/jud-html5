@@ -1,4 +1,4 @@
-(function(s) {console.log(s)})('START jud HTML5: 0.4.0 Build 20161019');
+(function(s) {console.log(s)})('START JUD HTML5: 0.4.0 Build 20161019');
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -95,7 +95,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.default = jud;
+	exports.default = Jud;
 	
 	__webpack_require__(2);
 	
@@ -192,9 +192,9 @@
 	  }
 	})();
 	
-	function jud(options) {
-	  if (!(this instanceof jud)) {
-	    return new jud(options);
+	function Jud(options) {
+	  if (!(this instanceof Jud)) {
+	    return new Jud(options);
 	  }
 	
 	  // Width of the root container. Default is window.innerWidth.
@@ -235,21 +235,21 @@
 	  }.bind(this));
 	}
 	
-	jud.init = function (options) {
+	Jud.init = function (options) {
 	  if (utils.isArray(options)) {
 	    options.forEach(function (config) {
-	      new jud(config);
+	      new Jud(config);
 	    });
 	  } else if (utils.getType(options) === 'object') {
-	    new jud(options);
+	    new Jud(options);
 	  }
 	};
 	
-	jud.getInstance = function (instanceId) {
+	Jud.getInstance = function (instanceId) {
 	  return _judInstance[instanceId];
 	};
 	
-	jud.prototype = {
+	Jud.prototype = {
 	
 	  createApp: function createApp(config, appCode) {
 	    var root = document.querySelector('#' + this.rootId);
@@ -275,7 +275,7 @@
 	    if (instance instanceof Promise) {
 	      return instance.then(function (res) {
 	        this.appInstance = res;
-	        // jud._instances[this.instanceId] = this.root
+	        // Jud._instances[this.instanceId] = this.root
 	      }).catch(function (err) {
 	        console.error('[h5-render]', err);
 	      });
@@ -302,10 +302,10 @@
 	  }
 	};
 	
-	jud.stopTheWorld = function (instanceId) {
+	Jud.stopTheWorld = function (instanceId) {
 	  if (!instanceId) {
 	    return Object.keys(_judInstance).map(function (instanceId) {
-	      jud.stopTheWorld(instanceId);
+	      Jud.stopTheWorld(instanceId);
 	    });
 	  }
 	  window.destroyInstance(instanceId);
@@ -337,9 +337,9 @@
 	  };
 	})();
 	
-	(0, _register.bind)(jud);
+	(0, _register.bind)(Jud);
 	
-	utils.extend(jud, {
+	utils.extend(Jud, {
 	  Component: _component2.default,
 	  Atomic: _atomic2.default,
 	  ComponentManager: _componentManager2.default,
@@ -347,7 +347,7 @@
 	  config: _config2.default
 	});
 	
-	global.jud = jud;
+	global.jud = Jud;
 
 /***/ },
 /* 2 */
@@ -2579,7 +2579,7 @@
 	  if (!info) {
 	    info = checkVersion(code) || {};
 	    if (!frameworks[info.framework]) {
-	      info.framework = 'jud';
+	      info.framework = 'Jud';
 	    }
 	    instanceMap[id] = info;
 	    config = config || {};
@@ -2676,12 +2676,12 @@
 	
 	var _default = __webpack_require__(78);
 	
-	var jud = _interopRequireWildcard(_default);
+	var Jud = _interopRequireWildcard(_default);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	exports.default = {
-	  jud: jud
+	  Jud: Jud
 	};
 
 /***/ },
@@ -2785,7 +2785,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	/**
-	 * Create a jud instance.
+	 * Create a Jud instance.
 	 *
 	 * @param  {string} id
 	 * @param  {string} code
@@ -2838,7 +2838,7 @@
 	 */
 	/**
 	 * @fileOverview
-	 * jud instance constructor & definition
+	 * Jud instance constructor & definition
 	 */
 	
 	_instance2.default.prototype.updateActions = function () {
@@ -3126,7 +3126,7 @@
 	  };
 	  var bundleDocument = app.doc;
 	  var bundleRequireModule = function bundleRequireModule(name) {
-	    return app.requireModule((0, _util.removejudPrefix)(name));
+	    return app.requireModule((0, _util.removeJudPrefix)(name));
 	  };
 	
 	  // prepare code
@@ -3333,7 +3333,7 @@
 	exports.createNewSet = createNewSet;
 	exports.cached = cached;
 	exports.typof = typof;
-	exports.removejudPrefix = removejudPrefix;
+	exports.removeJudPrefix = removeJudPrefix;
 	exports.removeJSSurfix = removeJSSurfix;
 	
 	
@@ -3439,26 +3439,26 @@
 	
 	// jud name rules
 	
-	var jud_COMPONENT_REG = /^@jud-component\//;
-	var jud_MODULE_REG = /^@jud-module\//;
+	var JUD_COMPONENT_REG = /^@jud-component\//;
+	var JUD_MODULE_REG = /^@jud-module\//;
 	var NORMAL_MODULE_REG = /^\.{1,2}\//;
 	var JS_SURFIX_REG = /\.js$/;
 	
-	var isjudComponent = exports.isjudComponent = function isjudComponent(name) {
-	  return !!name.match(jud_COMPONENT_REG);
+	var isJudComponent = exports.isJudComponent = function isJudComponent(name) {
+	  return !!name.match(JUD_COMPONENT_REG);
 	};
-	var isjudModule = exports.isjudModule = function isjudModule(name) {
-	  return !!name.match(jud_MODULE_REG);
+	var isJudModule = exports.isJudModule = function isJudModule(name) {
+	  return !!name.match(JUD_MODULE_REG);
 	};
 	var isNormalModule = exports.isNormalModule = function isNormalModule(name) {
 	  return !!name.match(NORMAL_MODULE_REG);
 	};
 	var isNpmModule = exports.isNpmModule = function isNpmModule(name) {
-	  return !isjudComponent(name) && !isjudModule(name) && !isNormalModule(name);
+	  return !isJudComponent(name) && !isJudModule(name) && !isNormalModule(name);
 	};
 	
-	function removejudPrefix(str) {
-	  var result = str.replace(jud_COMPONENT_REG, '').replace(jud_MODULE_REG, '');
+	function removeJudPrefix(str) {
+	  var result = str.replace(JUD_COMPONENT_REG, '').replace(JUD_MODULE_REG, '');
 	  return result;
 	}
 	
@@ -5970,8 +5970,8 @@
 	
 	  // 1. validate custom component name first
 	  var cleanName = void 0;
-	  if ((0, _util.isjudComponent)(name)) {
-	    cleanName = (0, _util.removejudPrefix)(name);
+	  if ((0, _util.isJudComponent)(name)) {
+	    cleanName = (0, _util.removeJudPrefix)(name);
 	  } else if ((0, _util.isNpmModule)(name)) {
 	    cleanName = (0, _util.removeJSSurfix)(name);
 	    // check if define by old 'define' method
@@ -6039,12 +6039,12 @@
 	  // resolve definition from factory
 	  if (factory) {
 	    var r = function r(name) {
-	      if ((0, _util.isjudComponent)(name)) {
-	        var cleanName = (0, _util.removejudPrefix)(name);
+	      if ((0, _util.isJudComponent)(name)) {
+	        var cleanName = (0, _util.removeJudPrefix)(name);
 	        return (0, _register.requireCustomComponent)(app, cleanName);
 	      }
-	      if ((0, _util.isjudModule)(name)) {
-	        var _cleanName = (0, _util.removejudPrefix)(name);
+	      if ((0, _util.isJudModule)(name)) {
+	        var _cleanName = (0, _util.removeJudPrefix)(name);
 	        return app.requireModule(_cleanName);
 	      }
 	      if ((0, _util.isNormalModule)(name) || (0, _util.isNpmModule)(name)) {
@@ -6058,11 +6058,11 @@
 	  }
 	
 	  // apply definition
-	  if ((0, _util.isjudComponent)(name)) {
-	    var cleanName = (0, _util.removejudPrefix)(name);
+	  if ((0, _util.isJudComponent)(name)) {
+	    var cleanName = (0, _util.removeJudPrefix)(name);
 	    (0, _register.registerCustomComponent)(app, cleanName, definition);
-	  } else if ((0, _util.isjudModule)(name)) {
-	    var _cleanName3 = (0, _util.removejudPrefix)(name);
+	  } else if ((0, _util.isJudModule)(name)) {
+	    var _cleanName3 = (0, _util.removeJudPrefix)(name);
 	    (0, _register.initModules)(_defineProperty({}, _cleanName3, definition));
 	  } else if ((0, _util.isNormalModule)(name)) {
 	    var _cleanName4 = (0, _util.removeJSSurfix)(name);
@@ -6370,13 +6370,13 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	/**
-	 * App constructor for jud framework.
+	 * App constructor for Jud framework.
 	 * @param {string} id
 	 * @param {object} options
 	 */
 	/**
 	 * @fileOverview
-	 * jud App constructor & definition
+	 * Jud App constructor & definition
 	 */
 	
 	function App(id, options) {
@@ -6536,7 +6536,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	/**
-	 * Init config informations for jud framework
+	 * Init config informations for Jud framework
 	 * @param  {object} cfg
 	 */
 	function init(cfg) {
@@ -6548,7 +6548,7 @@
 	}
 	
 	/**
-	 * Refresh a jud instance with data.
+	 * Refresh a Jud instance with data.
 	 *
 	 * @param  {string} id
 	 * @param  {object} data
@@ -6565,7 +6565,7 @@
 	}
 	
 	/**
-	 * Destroy a jud instance.
+	 * Destroy a Jud instance.
 	 * @param  {string} id
 	 */
 	function destroyInstance(id) {
@@ -6717,7 +6717,7 @@
 	  };
 	  var bundleDocument = app.doc;
 	  var bundleRequireModule = function bundleRequireModule(name) {
-	    return app.requireModule((0, _util.removejudPrefix)(name));
+	    return app.requireModule((0, _util.removeJudPrefix)(name));
 	  };
 	
 	  // prepare code
@@ -6862,8 +6862,8 @@
 	
 	  // 1. validate custom component name first
 	  var cleanName = void 0;
-	  if ((0, _util.isjudComponent)(name)) {
-	    cleanName = (0, _util.removejudPrefix)(name);
+	  if ((0, _util.isJudComponent)(name)) {
+	    cleanName = (0, _util.removeJudPrefix)(name);
 	  } else if ((0, _util.isNpmModule)(name)) {
 	    cleanName = (0, _util.removeJSSurfix)(name);
 	    // check if define by old 'define' method
@@ -8176,7 +8176,7 @@
 	}
 	
 	/**
-	 * jud framework input(deviceInfo)
+	 * JUD framework input(deviceInfo)
 	 * {
 	 *   platform: 'iOS' or 'android'
 	 *   osVersion: '1.0.0' or '1.0' or '1'
@@ -8202,7 +8202,7 @@
 	 * }
 	 *
 	 *
-	 * @param  {object} deviceInfo jud SDK framework input
+	 * @param  {object} deviceInfo Jud SDK framework input
 	 * @param  {object} config     user input
 	 * @return {Object}            { isDowngrade: true/false, errorMessage... }
 	 */
@@ -9371,7 +9371,7 @@
 	};
 	
 	ComponentManager.prototype = {
-	  getjudInstance: function getjudInstance() {
+	  getJudInstance: function getJudInstance() {
 	    if (!this._judInstance) {
 	      this._judInstance = global.jud ? global.jud.getInstance(this.id) : null;
 	    }
@@ -9431,7 +9431,7 @@
 	    }
 	
 	    data.instanceId = this.id;
-	    data.scale = this.getjudInstance().scale;
+	    data.scale = this.getJudInstance().scale;
 	    var component = new ComponentType(data, nodeType);
 	    var ref = data.ref;
 	    this.componentMap[ref] = component;
@@ -9454,11 +9454,11 @@
 	
 	    var nodeType = element.type;
 	    element.type = 'root';
-	    element.rootId = this.getjudInstance().rootId;
+	    element.rootId = this.getJudInstance().rootId;
 	    element.ref = '_root';
 	
 	    var root = this.createElement(element, nodeType);
-	    var body = document.querySelector('#' + this.getjudInstance().rootId) || document.body;
+	    var body = document.querySelector('#' + this.getJudInstance().rootId) || document.body;
 	    body.appendChild(root.node);
 	    root._appended = true;
 	
@@ -9474,7 +9474,7 @@
 	    if (parentRef === '_root' && !parent) {
 	      parent = this.createElement({
 	        type: 'root',
-	        rootId: this.getjudInstance().rootId,
+	        rootId: this.getJudInstance().rootId,
 	        ref: '_root'
 	      });
 	      parent._appended = true;
@@ -10409,7 +10409,7 @@
 	  // api meta info
 	  _meta: {},
 	
-	  // jud.registerApiModule used this to register and access apiModules.
+	  // Jud.registerApiModule used this to register and access apiModules.
 	  apiModule: {},
 	
 	  // get the api method meta info array for the module.
@@ -10757,8 +10757,8 @@
 	  getComponentManager: function getComponentManager() {
 	    return _dom.ComponentManager.getInstance(this.data.instanceId);
 	  },
-	  getjudInstance: function getjudInstance() {
-	    return this.getComponentManager().getjudInstance();
+	  getJudInstance: function getJudInstance() {
+	    return this.getComponentManager().getJudInstance();
 	  },
 	  getParent: function getParent() {
 	    return this.getComponentManager().componentMap[this.parentRef];
@@ -10782,7 +10782,7 @@
 	    return null;
 	  },
 	  getRootContainer: function getRootContainer() {
-	    var root = this.getjudInstance().getRoot() || document.body;
+	    var root = this.getJudInstance().getRoot() || document.body;
 	    return root;
 	  },
 	  isScrollable: function isScrollable() {
@@ -11115,7 +11115,7 @@
 	
 	function bindEvents(evts) {
 	  var self = this;
-	  var judInstance = this.getjudInstance();
+	  var judInstance = this.getJudInstance();
 	  evts.map(function (evt) {
 	    var func = self.event[evt] || {};
 	    var setter = func.setter;
@@ -12273,9 +12273,9 @@
 	  mod.init(this);
 	}
 	
-	function bind(jud) {
-	  jud.install = install.bind(jud);
-	  (0, _utils.extend)(jud, methods);
+	function bind(Jud) {
+	  Jud.install = install.bind(Jud);
+	  (0, _utils.extend)(Jud, methods);
 	}
 
 /***/ },
@@ -12782,7 +12782,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function detectRootHeight(root) {
-	  var rootQuery = '#' + root.getjudInstance().rootId;
+	  var rootQuery = '#' + root.getJudInstance().rootId;
 	  var rootContainer = document.querySelector(rootQuery) || document.body;
 	  var height = rootContainer.getBoundingClientRect().height;
 	  if (height > global.innerHeight) {
@@ -12790,8 +12790,8 @@
 	  }
 	}
 	
-	function init(jud) {
-	  var Component = jud.Component;
+	function init(Jud) {
+	  var Component = Jud.Component;
 	
 	  function RootComponent(data, nodeType) {
 	    var id = data.rootId + '-root';
@@ -12833,7 +12833,7 @@
 	
 	  RootComponent.prototype = Object.create(Component.prototype);
 	
-	  jud.registerComponent('root', RootComponent);
+	  Jud.registerComponent('root', RootComponent);
 	}
 	
 	exports.default = { init: init };
@@ -12847,8 +12847,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	function init(jud) {
-	  var Component = jud.Component;
+	function init(Jud) {
+	  var Component = Jud.Component;
 	
 	  function Div(data, nodeType) {
 	    Component.call(this, data, nodeType);
@@ -12856,8 +12856,8 @@
 	  }
 	  Div.prototype = Object.create(Component.prototype);
 	
-	  jud.registerComponent('div', Div);
-	  jud.registerComponent('container', Div);
+	  Jud.registerComponent('div', Div);
+	  Jud.registerComponent('container', Div);
 	}
 	
 	exports.default = { init: init };
@@ -12904,9 +12904,9 @@
 	  }
 	};
 	
-	function init(jud) {
-	  Component = jud.Component;
-	  var extend = jud.utils.extend;
+	function init(Jud) {
+	  Component = Jud.Component;
+	  var extend = Jud.utils.extend;
 	
 	  function Droot(data, nodeType) {
 	    if (data.ref !== '_root') {
@@ -12919,7 +12919,7 @@
 	  extend(Droot.prototype, proto);
 	  extend(Droot.prototype, { attr: attr });
 	
-	  jud.registerComponent('droot', Droot);
+	  Jud.registerComponent('droot', Droot);
 	}
 	
 	exports.default = { init: init };
@@ -12942,12 +12942,12 @@
 	
 	// install the apis and components as packages.
 	exports.default = {
-	  init: function init(jud) {
+	  init: function init(Jud) {
 	    if (!_packer2.default || !_packer2.default.length) {
 	      return;
 	    }
 	    _packer2.default.forEach(function (pkg) {
-	      return jud.install(pkg);
+	      return Jud.install(pkg);
 	    });
 	  }
 	};
@@ -13152,9 +13152,9 @@
 	  }
 	};
 	
-	function init(jud) {
-	  var Atomic = jud.Atomic;
-	  var extend = jud.utils.extend;
+	function init(Jud) {
+	  var Atomic = Jud.Atomic;
+	  var extend = Jud.utils.extend;
 	
 	  // attr
 	  //  - value: text content.
@@ -13170,7 +13170,7 @@
 	    style: extend(Object.create(Atomic.prototype.style), style)
 	  });
 	
-	  jud.registerComponent('text', Text);
+	  Jud.registerComponent('text', Text);
 	}
 	
 	exports.default = { init: init };
@@ -13245,9 +13245,9 @@
 	  }
 	};
 	
-	function init(jud) {
-	  var Atomic = jud.Atomic;
-	  var extend = jud.utils.extend;
+	function init(Jud) {
+	  var Atomic = Jud.Atomic;
+	  var extend = Jud.utils.extend;
 	
 	  function Image(data) {
 	    this.resize = DEFAULT_RESIZE_MODE;
@@ -13260,7 +13260,7 @@
 	    style: extend(Object.create(Atomic.prototype.style), style)
 	  });
 	
-	  jud.registerComponent('image', Image);
+	  Jud.registerComponent('image', Image);
 	}
 	
 	exports.default = { init: init };
@@ -13625,9 +13625,9 @@
 	  }
 	};
 	
-	function init(jud) {
-	  Component = jud.Component;
-	  extend = jud.utils.extend;
+	function init(Jud) {
+	  Component = Jud.Component;
+	  extend = Jud.utils.extend;
 	
 	  function Slider(data) {
 	    this.autoPlay = false; // default value is false.
@@ -13649,7 +13649,7 @@
 	  extend(Slider.prototype, { attr: attr });
 	  extend(Slider.prototype, { event: event });
 	
-	  jud.registerComponent('slider', Slider);
+	  Jud.registerComponent('slider', Slider);
 	}
 	
 	exports.default = { init: init };
@@ -14278,11 +14278,11 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
-	  init: function init(jud) {
-	    jud.install(_list2.default);
-	    jud.install(_scroller2.default);
-	    jud.install(_refresh2.default);
-	    jud.install(_loading2.default);
+	  init: function init(Jud) {
+	    Jud.install(_list2.default);
+	    Jud.install(_scroller2.default);
+	    Jud.install(_refresh2.default);
+	    Jud.install(_loading2.default);
 	  }
 	};
 
@@ -14306,9 +14306,9 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function init(jud) {
-	  jud.install(_vlist2.default);
-	  jud.install(_hlist2.default);
+	function init(Jud) {
+	  Jud.install(_vlist2.default);
+	  Jud.install(_hlist2.default);
 	}
 	
 	exports.default = { init: init };
@@ -14329,8 +14329,8 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function init(jud) {
-	  var List = _list2.default.init(jud);
+	function init(Jud) {
+	  var List = _list2.default.init(Jud);
 	
 	  function Vlist(data, nodeType) {
 	    data.attr.direction = 'v';
@@ -14338,8 +14338,8 @@
 	  }
 	  Vlist.prototype = Object.create(List.prototype);
 	
-	  jud.registerComponent('list', Vlist);
-	  jud.registerComponent('vlist', Vlist);
+	  Jud.registerComponent('list', Vlist);
+	  Jud.registerComponent('vlist', Vlist);
 	}
 	
 	exports.default = { init: init };
@@ -14403,12 +14403,12 @@
 	  };
 	}
 	
-	function init(jud) {
-	  var Scrollable = _scrollable2.default.init(jud);
+	function init(Jud) {
+	  var Scrollable = _scrollable2.default.init(Jud);
 	  function List(data, nodeType) {
 	    Scrollable.call(this, data, nodeType);
 	  }
-	  var extend = jud.utils.extend;
+	  var extend = Jud.utils.extend;
 	
 	  List.prototype = Object.create(Scrollable.prototype);
 	  extend(List.prototype, getProto(Scrollable));
@@ -14468,8 +14468,8 @@
 	  }
 	}
 	
-	function getProto(jud) {
-	  var Component = jud.Component;
+	function getProto(Jud) {
+	  var Component = Jud.Component;
 	
 	  function create(nodeType) {
 	    var Scroll = lib.scroll;
@@ -14691,9 +14691,9 @@
 	  }
 	};
 	
-	function init(jud) {
-	  var Component = jud.Component;
-	  var extend = jud.utils.extend;
+	function init(Jud) {
+	  var Component = Jud.Component;
+	  var extend = Jud.utils.extend;
 	
 	  // attrs:
 	  //  - loadmoreoffset: updatable
@@ -14709,7 +14709,7 @@
 	    Component.call(this, data, nodeType);
 	  }
 	  Scrollable.prototype = Object.create(Component.prototype);
-	  extend(Scrollable.prototype, getProto(jud));
+	  extend(Scrollable.prototype, getProto(Jud));
 	  extend(Scrollable.prototype, { attr: attr });
 	  return Scrollable;
 	}
@@ -15953,8 +15953,8 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function init(jud) {
-	  var List = _list2.default.init(jud);
+	function init(Jud) {
+	  var List = _list2.default.init(Jud);
 	
 	  function Hlist(data, nodeType) {
 	    data.attr.direction = 'h';
@@ -15963,7 +15963,7 @@
 	
 	  Hlist.prototype = Object.create(List.prototype);
 	
-	  jud.registerComponent('hlist', Hlist);
+	  Jud.registerComponent('hlist', Hlist);
 	}
 	
 	exports.default = { init: init };
@@ -15984,12 +15984,12 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function init(jud) {
-	  var Scrollable = _scrollable2.default.init(jud);
+	function init(Jud) {
+	  var Scrollable = _scrollable2.default.init(Jud);
 	  function Scroller(data, nodeType) {
 	    Scrollable.call(this, data, nodeType);
 	  }
-	  var extend = jud.utils.extend;
+	  var extend = Jud.utils.extend;
 	
 	  Scroller.prototype = Object.create(Scrollable.prototype);
 	  extend(Scroller.prototype, {
@@ -16001,7 +16001,7 @@
 	    }
 	  });
 	
-	  jud.registerComponent('scroller', Scroller);
+	  Jud.registerComponent('scroller', Scroller);
 	}
 	
 	exports.default = { init: init };
@@ -16125,9 +16125,9 @@
 	  }
 	};
 	
-	function init(jud) {
-	  var Component = jud.Component;
-	  var extend = jud.utils.extend;
+	function init(Jud) {
+	  var Component = Jud.Component;
+	  var extend = Jud.utils.extend;
 	
 	  function Refresh(data) {
 	    this.isRefreshing = false;
@@ -16143,7 +16143,7 @@
 	    style: extend(Object.create(Component.prototype.style), style)
 	  });
 	
-	  jud.registerComponent('refresh', Refresh);
+	  Jud.registerComponent('refresh', Refresh);
 	}
 	
 	exports.default = { init: init };
@@ -16297,9 +16297,9 @@
 	  }
 	};
 	
-	function init(jud) {
-	  var Component = jud.Component;
-	  var extend = jud.utils.extend;
+	function init(Jud) {
+	  var Component = Jud.Component;
+	  var extend = Jud.utils.extend;
 	
 	  function Loading(data) {
 	    this.clamp = (data.style.height || DEFAULT_CLAMP) * data.scale;
@@ -16314,7 +16314,7 @@
 	    style: extend(Object.create(Component.prototype.style), style)
 	  });
 	
-	  jud.registerComponent('loading', Loading);
+	  Jud.registerComponent('loading', Loading);
 	}
 	
 	exports.default = { init: init };
@@ -16493,9 +16493,9 @@
 	  }
 	};
 	
-	function init(jud) {
-	  var Atomic = jud.Atomic;
-	  var extend = jud.utils.extend;
+	function init(Jud) {
+	  var Atomic = Jud.Atomic;
+	  var extend = Jud.utils.extend;
 	
 	  // Style supported:
 	  //   position: (default - absolute)
@@ -16524,7 +16524,7 @@
 	    style: extend(Object.create(Atomic.prototype.style), style)
 	  });
 	
-	  jud.registerComponent('indicator', Indicator);
+	  Jud.registerComponent('indicator', Indicator);
 	}
 	
 	exports.default = { init: init };
@@ -16946,9 +16946,9 @@
 	  }
 	};
 	
-	function init(jud) {
-	  var Atomic = jud.Atomic;
-	  var extend = jud.utils.extend;
+	function init(Jud) {
+	  var Atomic = Jud.Atomic;
+	  var extend = Jud.utils.extend;
 	
 	  function TabHeader(data) {
 	    Atomic.call(this, data);
@@ -16960,7 +16960,7 @@
 	    style: extend(Object.create(Atomic.prototype.style), style)
 	  });
 	
-	  jud.registerComponent('tabheader', TabHeader);
+	  Jud.registerComponent('tabheader', TabHeader);
 	}
 	
 	exports.default = { init: init };
@@ -17106,10 +17106,10 @@
 	  }
 	};
 	
-	function init(jud) {
-	  var Atomic = jud.Atomic;
-	  var extend = jud.utils.extend;
-	  appendStyle = jud.utils.appendStyle;
+	function init(Jud) {
+	  var Atomic = Jud.Atomic;
+	  var extend = Jud.utils.extend;
+	  appendStyle = Jud.utils.appendStyle;
 	
 	  // attrs:
 	  //   - type: text|password|tel|email|url
@@ -17128,7 +17128,7 @@
 	  });
 	  extend(Input.prototype, { event: event });
 	
-	  jud.registerComponent('input', Input);
+	  Jud.registerComponent('input', Input);
 	}
 	
 	exports.default = { init: init };
@@ -17214,9 +17214,9 @@
 	  }
 	};
 	
-	function init(jud) {
-	  var Atomic = jud.Atomic;
-	  var extend = jud.utils.extend;
+	function init(Jud) {
+	  var Atomic = Jud.Atomic;
+	  var extend = Jud.utils.extend;
 	
 	  // attrs:
 	  //   - rows
@@ -17230,7 +17230,7 @@
 	  extend(Textarea.prototype, { attr: attr });
 	  extend(Textarea.prototype, { event: event });
 	
-	  jud.registerComponent('textarea', Textarea);
+	  Jud.registerComponent('textarea', Textarea);
 	}
 	
 	exports.default = { init: init };
@@ -17246,8 +17246,8 @@
 	});
 	__webpack_require__(192);
 	
-	function getProto(jud) {
-	  var Atomic = jud.Atomic;
+	function getProto(Jud) {
+	  var Atomic = Jud.Atomic;
 	  return {
 	    create: function create() {
 	      var node = document.createElement('video');
@@ -17314,9 +17314,9 @@
 	  }
 	};
 	
-	function init(jud) {
-	  var Atomic = jud.Atomic;
-	  var extend = jud.utils.extend;
+	function init(Jud) {
+	  var Atomic = Jud.Atomic;
+	  var extend = Jud.utils.extend;
 	
 	  // attrs:
 	  //   - autoPlay: true | false (default: false)
@@ -17342,10 +17342,10 @@
 	    Atomic.call(this, data);
 	  }
 	  Video.prototype = Object.create(Atomic.prototype);
-	  extend(Video.prototype, getProto(jud));
+	  extend(Video.prototype, getProto(Jud));
 	  extend(Video.prototype, { attr: attr });
 	
-	  jud.registerComponent('video', Video);
+	  Jud.registerComponent('video', Video);
 	}
 	
 	exports.default = { init: init };
@@ -17587,9 +17587,9 @@
 	  }
 	};
 	
-	function init(jud) {
-	  var Atomic = jud.Atomic;
-	  var extend = jud.utils.extend;
+	function init(Jud) {
+	  var Atomic = Jud.Atomic;
+	  var extend = Jud.utils.extend;
 	
 	  // attrs:
 	  //   - checked: if is checked.
@@ -17610,7 +17610,7 @@
 	  });
 	  extend(Switch.prototype, { event: event });
 	
-	  jud.registerComponent('switch', Switch);
+	  Jud.registerComponent('switch', Switch);
 	}
 	
 	exports.default = { init: init };
@@ -17679,7 +17679,7 @@
 	    node.style.overflow = 'scroll';
 	    return node;
 	  },
-	  initjud: function initjud() {
+	  initJud: function initJud() {
 	    this.id = _generateId();
 	    this.node.id = this.id;
 	    var config = {
@@ -17694,19 +17694,19 @@
 	    };
 	    window.jud.init(config);
 	  },
-	  destroyjud: function destroyjud() {
+	  destroyJud: function destroyJud() {
 	    this.id && window.destroyInstance(this.id);
 	    // TODO: unbind events and clear doms.
 	    this.node.innerHTML = '';
 	  },
-	  reloadjud: function reloadjud() {
+	  reloadJud: function reloadJud() {
 	    if (this.id) {
-	      this.destroyjud();
+	      this.destroyJud();
 	      this.id = null;
 	      this.node.id = null;
 	      this.node.innerHTML = '';
 	    }
-	    this.initjud();
+	    this.initJud();
 	  }
 	};
 	
@@ -17714,14 +17714,14 @@
 	var attr = {
 	  src: function src(value) {
 	    this.source = value;
-	    this.reloadjud();
+	    this.reloadJud();
 	  }
 	};
 	
-	function init(jud) {
-	  var Component = jud.Component;
-	  var extend = jud.utils.extend;
-	  getRandom = jud.utils.getRandom;
+	function init(Jud) {
+	  var Component = Jud.Component;
+	  var extend = Jud.utils.extend;
+	  getRandom = Jud.utils.getRandom;
 	
 	  function Embed(data, nodeType) {
 	    var attr = data.attr;
@@ -17737,7 +17737,7 @@
 	  extend(Embed.prototype, proto);
 	  extend(Embed.prototype, { attr: attr });
 	
-	  jud.registerComponent('embed', Embed);
+	  Jud.registerComponent('embed', Embed);
 	}
 	
 	exports.default = { init: init };
@@ -17855,11 +17855,11 @@
 	//   }
 	// }
 	
-	function init(jud) {
-	  var Atomic = jud.Atomic;
-	  var extend = jud.utils.extend;
-	  getRgb = jud.utils.getRgb;
-	  loopArray = jud.utils.loopArray;
+	function init(Jud) {
+	  var Atomic = Jud.Atomic;
+	  var extend = Jud.utils.extend;
+	  getRgb = Jud.utils.getRgb;
+	  loopArray = Jud.utils.loopArray;
 	
 	  function Spinner(data) {
 	    Atomic.call(this, data);
@@ -17870,8 +17870,8 @@
 	    style: extend(Object.create(Atomic.prototype.style), style)
 	  });
 	
-	  jud.registerComponent('spinner', Spinner);
-	  jud.registerComponent('loading-indicator', Spinner);
+	  Jud.registerComponent('spinner', Spinner);
+	  Jud.registerComponent('loading-indicator', Spinner);
 	}
 	
 	exports.default = { init: init };
@@ -17945,8 +17945,8 @@
 	  }
 	}
 	
-	function getProto(jud) {
-	  var Atomic = jud.Atomic;
+	function getProto(Jud) {
+	  var Atomic = Jud.Atomic;
 	  return {
 	    create: function create() {
 	      // Iframe's defect: can't use position:absolute and top, left, right,
@@ -17995,10 +17995,10 @@
 	  }
 	};
 	
-	function init(jud) {
-	  var Atomic = jud.Atomic;
-	  var extend = jud.utils.extend;
-	  isArray = jud.utils.isArray;
+	function init(Jud) {
+	  var Atomic = Jud.Atomic;
+	  var extend = Jud.utils.extend;
+	  isArray = Jud.utils.isArray;
 	
 	  // A component to import web pages, which works like
 	  // a iframe element or a webview.
@@ -18012,10 +18012,10 @@
 	    Atomic.call(this, data);
 	  }
 	  Web.prototype = Object.create(Atomic.prototype);
-	  extend(Web.prototype, getProto(jud));
+	  extend(Web.prototype, getProto(Jud));
 	  extend(Web.prototype, { attr: attr });
 	
-	  jud.registerComponent('web', Web);
+	  Jud.registerComponent('web', Web);
 	}
 	
 	exports.default = { init: init };
@@ -18075,8 +18075,8 @@
 	};
 	
 	exports.default = {
-	  init: function init(jud) {
-	    jud.registerApiModule('animation', animation, meta);
+	  init: function init(Jud) {
+	    Jud.registerApiModule('animation', animation, meta);
 	  }
 	};
 
@@ -18143,7 +18143,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var jud_CLIPBOARD_ID = '__jud_clipboard_id__';
+	var JUD_CLIPBOARD_ID = '__jud_clipboard_id__';
 	
 	var clipboard = {
 	
@@ -18172,10 +18172,10 @@
 	};
 	
 	function element() {
-	  var tempInput = document.getElementById(jud_CLIPBOARD_ID);
+	  var tempInput = document.getElementById(JUD_CLIPBOARD_ID);
 	  if (tempInput === undefined) {
 	    tempInput = document.createElement('input');
-	    tempInput.setAttribute('id', jud_CLIPBOARD_ID);
+	    tempInput.setAttribute('id', JUD_CLIPBOARD_ID);
 	    tempInput.style.cssText = 'height:1px;width:1px;border:none;';
 	    // tempInput.style.cssText = "height:40px;width:300px;border:solid;"
 	    document.body.appendChild(tempInput);
@@ -18194,8 +18194,8 @@
 	};
 	
 	exports.default = {
-	  init: function init(jud) {
-	    jud.registerApiModule('clipboard', clipboard, meta);
+	  init: function init(Jud) {
+	    Jud.registerApiModule('clipboard', clipboard, meta);
 	  }
 	};
 
@@ -18273,10 +18273,10 @@
 	};
 	
 	exports.default = {
-	  init: function init(jud) {
-	    camelToKebab = jud.utils.camelToKebab;
-	    appendStyle = jud.utils.appendStyle;
-	    jud.registerApiModule('dom', dom, meta);
+	  init: function init(Jud) {
+	    camelToKebab = Jud.utils.camelToKebab;
+	    appendStyle = Jud.utils.appendStyle;
+	    Jud.registerApiModule('dom', dom, meta);
 	  }
 	};
 
@@ -19049,8 +19049,8 @@
 	};
 	
 	exports.default = {
-	  init: function init(jud) {
-	    jud.registerApiModule('event', event, meta);
+	  init: function init(Jud) {
+	    Jud.registerApiModule('event', event, meta);
 	  }
 	};
 
@@ -19135,8 +19135,8 @@
 	};
 	
 	exports.default = {
-	  init: function init(jud) {
-	    jud.registerApiModule('geolocation', geolocation, meta);
+	  init: function init(Jud) {
+	    Jud.registerApiModule('geolocation', geolocation, meta);
 	  }
 	};
 
@@ -19197,8 +19197,8 @@
 	};
 	
 	exports.default = {
-	  init: function init(jud) {
-	    jud.registerApiModule('globalEvent', globalEvent, meta);
+	  init: function init(Jud) {
+	    Jud.registerApiModule('globalEvent', globalEvent, meta);
 	  }
 	};
 
@@ -19281,8 +19281,8 @@
 	};
 	
 	exports.default = {
-	  init: function init(jud) {
-	    jud.registerApiModule('modal', msg, meta);
+	  init: function init(Jud) {
+	    Jud.registerApiModule('modal', msg, meta);
 	  }
 	};
 
@@ -19946,8 +19946,8 @@
 	};
 	
 	exports.default = {
-	  init: function init(jud) {
-	    jud.registerApiModule('navigator', navigator, meta);
+	  init: function init(Jud) {
+	    Jud.registerApiModule('navigator', navigator, meta);
 	  }
 	};
 
@@ -19963,7 +19963,7 @@
 	var pageInfo = {
 	
 	  setTitle: function setTitle(title) {
-	    title = title || 'jud HTML5';
+	    title = title || 'Jud HTML5';
 	    try {
 	      title = decodeURIComponent(title);
 	    } catch (e) {}
@@ -19979,8 +19979,8 @@
 	};
 	
 	exports.default = {
-	  init: function init(jud) {
-	    jud.registerApiModule('pageInfo', pageInfo, meta);
+	  init: function init(Jud) {
+	    Jud.registerApiModule('pageInfo', pageInfo, meta);
 	  }
 	};
 
@@ -20145,8 +20145,8 @@
 	};
 	
 	exports.default = {
-	  init: function init(jud) {
-	    jud.registerApiModule('storage', storage, meta);
+	  init: function init(Jud) {
+	    Jud.registerApiModule('storage', storage, meta);
 	  }
 	};
 
@@ -20435,9 +20435,9 @@
 	};
 	
 	exports.default = {
-	  init: function init(jud) {
-	    utils = jud.utils;
-	    jud.registerApiModule('stream', stream, meta);
+	  init: function init(Jud) {
+	    utils = Jud.utils;
+	    Jud.registerApiModule('stream', stream, meta);
 	  }
 	};
 
@@ -20498,8 +20498,8 @@
 	};
 	
 	exports.default = {
-	  init: function init(jud) {
-	    jud.registerApiModule('webview', webview, meta);
+	  init: function init(Jud) {
+	    Jud.registerApiModule('webview', webview, meta);
 	  }
 	};
 
